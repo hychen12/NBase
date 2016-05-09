@@ -15,7 +15,11 @@
 		"serve-favicon": "~2.3.0",
 		"file-stream-rotator": "0.0.6",
 		"mootools": "^1.5.1",
-		"log4js": "~0.6.29"
+		"log4js": "~0.6.29",
+		"cookie-session":"latest",
+		"mysql": "latest",
+		"sequelize": "latest",
+		"redis":"latest"
 	},
 	"sys": {
 		"name": "NBase",

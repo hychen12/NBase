@@ -63,7 +63,6 @@ log.info('[' + P.name + '] App level loading completed!');
 module.exports = app;
 
 
-
 function accessLogger(){
 	if(P.devMode) return morgan('dev');
 
