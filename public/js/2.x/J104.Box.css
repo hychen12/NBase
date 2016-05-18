@@ -1,0 +1,557 @@
+/** J104.Box **/
+.J104Box.wrapper {
+	position: absolute;
+}
+.J104Box .container{
+	background-color: #FFF;
+	box-shadow: 0 3px 15px rgba(0, 0, 0, .4), 0 0 5px rgba(0, 0, 0, .4);
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	height: auto;
+}
+.J104Box > .pointer {
+	overflow: hidden;
+	position: absolute;
+}
+.J104Box > .pointer::after {
+	position: absolute;
+	content: ' ';
+	width: 20px;
+	height: 20px;
+	background: #FFF;
+	transform: rotate(45deg);
+	box-shadow: 0 0px 4px rgba(0, 0, 0, 0.6);
+}
+.J104Box > .pointer.top, .J104Box > .pointer.bottom {
+	width: 29px;
+	height: 14px;
+}
+.J104Box > .pointer.top::after {
+	left: 4px;
+	top: 6px;
+}
+.J104Box > .pointer.bottom::after {
+	left: 4px;
+	bottom: 6px;
+}
+.J104Box > .pointer.right, .J104Box > .pointer.left {
+	width: 14px;
+	height: 29px;
+}
+.J104Box > .pointer.right::after {
+	left: -14px;
+	top: 4px;
+}
+.J104Box > .pointer.left::after {
+	left: 6px;
+	top: 4px;
+}
+.J104Box .header{
+	padding: 5px;
+	background-color: #EEE;
+}
+.J104Box .body{
+	padding: 5px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.J104Box .footer{
+	padding: 5px;
+	background-color: #EEE;
+}
+.J104BoxLockScroll {
+	overflow: hidden;
+}
+
+/** J104.Box.Tip **/
+@keyframes fadeInDown-10 {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(-10px);
+		-ms-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+@keyframes fadeInUp-10 {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateY(10px);
+		-ms-transform: translateY(10px);
+		transform: translateY(10px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0);
+	}
+}
+@keyframes fadeInLeft-10 {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateX(10px);
+		-ms-transform: translateX(10px);
+		transform: translateX(10px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+		-ms-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+@keyframes fadeInRight-10 {
+	0% {
+		opacity: 0;
+		-webkit-transform: translateX(-10px);
+		-ms-transform: translateX(-10px);
+		transform: translateX(-10px);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: translateX(0);
+		-ms-transform: translateX(0);
+		transform: translateX(0);
+	}
+}
+@keyframes fadeOutDown-10 {
+	0% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translateY(10px);
+		-ms-transform: translateY(10px);
+		transform: translateY(10px);
+	}
+}
+@keyframes fadeOutUp-10 {
+	0% {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+		-ms-transform: translateY(0);
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translateY(-10px);
+		-ms-transform: translateY(-10px);
+		transform: translateY(-10px);
+	}
+}
+@keyframes fadeOutLeft-10 {
+	0% {
+		opacity: 1;
+		-webkit-transform: translateX(0px);
+		-ms-transform: translateX(0px);
+		transform: translateX(0px);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translateX(-10px);
+		-ms-transform: translateX(-10px);
+		transform: translateX(-10px);
+	}
+}
+@keyframes fadeOutRight-10 {
+	0% {
+		opacity: 1;
+		-webkit-transform: translateX(0px);
+		-ms-transform: translateX(0px);
+		transform: translateX(0px);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translateX(10px);
+		-ms-transform: translateX(10px);
+		transform: translateX(10px);
+	}
+}
+.an-fadeInDown-10{ animation-name: fadeInDown-10; }
+.an-fadeInUp-10{ animation-name: fadeInUp-10; }
+.an-fadeInLeft-10{ animation-name: fadeInLeft-10; }
+.an-fadeInRight-10{ animation-name: fadeInRight-10; }
+.an-fadeOutDown-10{ animation-name: fadeOutDown-10; }
+.an-fadeOutUp-10{ animation-name: fadeOutUp-10; }
+.an-fadeOutLeft-10{ animation-name: fadeOutLeft-10; }
+.an-fadeOutRight-10{ animation-name: fadeOutRight-10; }
+
+.J104BoxTip.wrapper,
+.J104BoxTip-hint.wrapper,
+.J104BoxTip-validate.wrapper {
+	position: absolute;
+}
+.J104BoxTip .container,
+.J104BoxTip-hint .container,
+.J104BoxTip-validate .container{
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	height: auto;
+	border-radius: 3px;
+	background: #000;
+	color: #fff;
+	box-shadow: 0 0 6px rgba(0,0,0,.4);
+	opacity: .8;
+}
+.J104BoxTip > .pointer,
+.J104BoxTip-hint > .pointer,
+.J104BoxTip-validate > .pointer {
+	overflow: hidden;
+	position: absolute;
+	opacity: .8;
+}
+.J104BoxTip > .pointer::after,
+.J104BoxTip-hint > .pointer::after,
+.J104BoxTip-validate > .pointer::after {
+	position: absolute;
+	content: ' ';
+	width: 12px;
+	height: 12px;
+	background: #000;
+	transform: rotate(45deg);
+	box-shadow: 0 0 6px rgba(0,0,0,.4);
+}
+.J104BoxTip > .pointer.top, .J104BoxTip > .pointer.bottom,
+.J104BoxTip-hint > .pointer.top, .J104BoxTip-hint > .pointer.bottom,
+.J104BoxTip-validate > .pointer.top, .J104BoxTip-validate > .pointer.bottom {
+	width: 20px;
+	height: 10px;
+}
+.J104BoxTip > .pointer.top::after,
+.J104BoxTip-hint > .pointer.top::after,
+.J104BoxTip-validate > .pointer.top::after {
+	left: 4px;
+	top: 5px;
+}
+.J104BoxTip > .pointer.bottom::after,
+.J104BoxTip-hint > .pointer.bottom::after,
+.J104BoxTip-validate > .pointer.bottom::after {
+	left: 4px;
+	bottom: 5px;
+}
+.J104BoxTip > .pointer.right, .J104BoxTip > .pointer.left,
+.J104BoxTip-hint > .pointer.right, .J104BoxTip-hint > .pointer.left,
+.J104BoxTip-validate > .pointer.right, .J104BoxTip-validate > .pointer.left {
+	width: 10px;
+	height: 20px;
+}
+.J104BoxTip > .pointer.right::after,
+.J104BoxTip-hint > .pointer.right::after,
+.J104BoxTip-validate > .pointer.right::after {
+	left: -7px;
+	top: 4px;
+}
+.J104BoxTip > .pointer.left::after,
+.J104BoxTip-hint > .pointer.left::after,
+.J104BoxTip-validate > .pointer.left::after {
+	left: 5px;
+	top: 4px;
+}
+.J104BoxTip .body,
+.J104BoxTip-hint .body,
+.J104BoxTip-validate .body {
+	padding: 8px 15px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+/* theme: hint */
+.J104BoxTip-hint .container{
+	background: #245580;
+	font-size: 12px;
+	border-radius: 20px;
+}
+.J104BoxTip-hint > .pointer::after {
+	background: #265a88;
+}
+.J104BoxTip-hint .body:before{
+	content: '\f0eb';
+	margin-right: 5px;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: 16px;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	opacity: .7;
+}
+
+/* theme: validate */
+.J104BoxTip-validate .container{
+	background: #c12e2a;
+	font-size: 12px;
+	border-radius: 0px;
+}
+.J104BoxTip-validate > .pointer::after {
+	background: #c12e2a;
+}
+.J104BoxTip-validate .body:before {
+	content: '\f06a';
+	margin-right: 5px;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: 16px;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/** J104.Box.Notice **/
+@keyframes tada {
+	0% {
+		-webkit-transform: scale(1);
+		-ms-transform: scale(1);
+		transform: scale(1);
+	}
+
+	10%, 20% {
+		-webkit-transform: scale(0.9) rotate(-3deg);
+		-ms-transform: scale(0.9) rotate(-3deg);
+		transform: scale(0.9) rotate(-3deg);
+	}
+
+	30%, 50%, 70%, 90% {
+		-webkit-transform: scale(1.1) rotate(3deg);
+		-ms-transform: scale(1.1) rotate(3deg);
+		transform: scale(1.1) rotate(3deg);
+	}
+
+	40%, 60%, 80% {
+		-webkit-transform: scale(1.1) rotate(-3deg);
+		-ms-transform: scale(1.1) rotate(-3deg);
+		transform: scale(1.1) rotate(-3deg);
+	}
+
+	100% {
+		-webkit-transform: scale(1) rotate(0);
+		-ms-transform: scale(1) rotate(0);
+		transform: scale(1) rotate(0);
+	}
+}
+.an-tada { animation-name: tada; }
+
+.J104BoxNotice.wrapper{
+	position: absolute;
+	max-width: 360px;
+}
+.J104BoxNotice .container{
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	height: auto;
+	border-radius: 3px;
+	box-shadow: 0 0 3px rgba(0,0,0,.2);
+	color: #fff;
+	text-shadow: 0 -1px 0 #000;
+	background: #333;
+	background-image: linear-gradient(to bottom,#444,#222);
+}
+.J104BoxNotice .body{
+	padding: 10px 20px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.J104BoxNotice .footer > .counterWrapper{
+	padding: 0 2px 2px 2px;
+}
+.J104BoxNotice .footer > .counterWrapper > .counter{
+	background-color: #FFF;
+	height: 2px;
+	opacity: .3;
+}
+
+/* theme: success, info, warning, error */
+.J104BoxNotice-success.wrapper, .J104BoxNotice-info.wrapper, .J104BoxNotice-warning.wrapper, .J104BoxNotice-error.wrapper {
+	position: absolute;
+	max-width: 360px;
+}
+.J104BoxNotice-success .container, .J104BoxNotice-info .container, .J104BoxNotice-warning .container, .J104BoxNotice-error .container{
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	height: auto;
+	border-radius: 2px;
+	box-shadow: 0 0 3px rgba(0,0,0,.3);
+	color: #fff;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+}
+.J104BoxNotice-success .container{
+	background: #70a800;
+	background-image: linear-gradient(to bottom, #95cc2a, #70a800);
+}
+.J104BoxNotice-info .container{
+	background: #2b91d9;
+	background-image: linear-gradient(to bottom, #5abaff, #2b91d9);
+}
+.J104BoxNotice-warning .container{
+	color: #744700;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, .6);
+	background: #ffb11f;
+	background-image: linear-gradient(to bottom, #ffd665, #ffb11f);
+}
+.J104BoxNotice-error .container{
+	background: #b02222;
+	background-image: linear-gradient(to bottom, #ee2222, #b02222);
+}
+.J104BoxNotice-success .body:before, .J104BoxNotice-info .body:before, .J104BoxNotice-warning .body:before, .J104BoxNotice-error .body:before{
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: 20px;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	margin: 0 10px 0 5px;
+	vertical-align: middle;
+	width: 20px;
+	text-align: right;
+	display: inline-block;
+}
+.J104BoxNotice-success .body:before { content: '\f00c'; }
+.J104BoxNotice-info .body:before { content: '\f05a'; }
+.J104BoxNotice-warning .body:before { content: '\f071'; }
+.J104BoxNotice-error .body:before { content: '\f00d'; }
+.J104BoxNotice-success .body, .J104BoxNotice-info .body, .J104BoxNotice-warning .body, .J104BoxNotice-error .body{
+	padding: 10px 20px 10px 45px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	text-indent: -35px;
+}
+.J104BoxNotice-success .footer > .counterWrapper, .J104BoxNotice-info .footer > .counterWrapper,
+.J104BoxNotice-warning .footer > .counterWrapper, .J104BoxNotice-error .footer > .counterWrapper{
+	padding: 0 2px 2px 2px;
+}
+.J104BoxNotice-success .footer > .counterWrapper > .counter, .J104BoxNotice-info .footer > .counterWrapper > .counter,
+.J104BoxNotice-warning .footer > .counterWrapper > .counter, .J104BoxNotice-error .footer > .counterWrapper > .counter{
+	background-color: #FFF;
+	height: 2px;
+	opacity: .5;
+}
+
+
+/** J104.Box.Dialog **/
+.J104BoxDialog.wrapper {
+	position: absolute;
+}
+.J104BoxDialog .container{
+	background-color: #FFF;
+	box-shadow: 0 3px 15px rgba(0, 0, 0, .4), 0 0 5px rgba(0, 0, 0, .4);
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	height: auto;
+	border-radius: 3px;
+}
+.J104BoxDialog .header{
+	background-color: #F2F2F2;
+	position: relative;
+	box-shadow: inset 0 -2px 6px -2px rgba(0, 0, 0, .1);
+	border-bottom: 1px solid #CCC;
+	border-radius: 3px 3px 0 0;
+}
+.J104BoxDialog .header > .title{
+	position: relative;
+	word-break: break-all;
+	padding: 10px 20px;
+	line-height: 20px;
+	color: #000;
+}
+.J104BoxDialog .header > .title.draggable{
+	cursor: move;
+}
+.J104BoxDialog .header > .title:before{
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: '\f109';
+	margin-right: 10px;
+	color: #666;
+}
+.J104BoxDialog .header > .close{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 40px;
+	text-align: center;
+	cursor: pointer;
+	color: #CCC;
+	text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+}
+.J104BoxDialog .header > .close:hover{
+	color: #C00;
+}
+.J104BoxDialog .header > .close:before{
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: '\f00d';
+	line-height: 40px;
+	font-size: 20px;
+}
+.J104BoxDialog .body{
+	padding: 5px 20px 20px 20px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.J104BoxDialog .footer{
+	padding: 10px 20px;
+	background-color: #F6F6F6;
+	border-radius: 0 0 4px 4px;
+	border-top: 1px solid #CCC;
+	text-align: center;
+}
+.J104BoxDialog .footer .btn{
+	margin: 0 5px;
+}
+
+
+/** J104.Box.Confirm **/
+.J104BoxConfirm.wrapper {
+	position: absolute;
+}
+.J104BoxConfirm .container{
+	background-color: #FFF;
+	box-shadow: 0 3px 15px rgba(0, 0, 0, .4), 0 0 5px rgba(0, 0, 0, .4);
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+	height: auto;
+	border-radius: 3px;
+	max-width: 400px;
+	min-width: 250px;
+}
+.J104BoxConfirm .body{
+	padding: 30px 30px 20px 80px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.J104BoxConfirm .body:before{
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: 40px;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	float: left;
+	content: '\f059';
+	margin: -10px 0px 0px -50px;
+	color: #265a88;
+}
+.J104BoxConfirm .footer{
+	padding: 0px 20px 15px 20px;
+	text-align: center;
+}
+.J104BoxConfirm .footer .btn{
+	margin: 0 4px;
+}

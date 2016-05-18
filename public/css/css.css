@@ -1,0 +1,49 @@
+@font-face {
+	font-family: 'zhTW-1';
+	src: url(zhTW-1.woff) format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+	box-shadow: none;
+	background: transparent;
+	padding: 1px;
+}
+
+*::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	background: #BBB;
+	box-shadow: none;
+	border: 1px solid #FFF;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background: #999;
+}
+
+body {
+	font-family: 'zhTW-1', 'Microsoft JhengHei';
+	vertical-align: middle;
+	background-color: #F2F2F2;
+	padding: 0px 10px 10px 10px;
+	font-size: 14px;
+}
+
+hr{
+	border-top: 1px solid #DDD;
+	border-bottom: 1px solid #FFF;
+}
+
+button {
+	outline: none !important;
+}
+
+textarea.form-control{
+	resize: none;
+}

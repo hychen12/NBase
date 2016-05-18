@@ -1,0 +1,151 @@
+<style>
+button:after {
+	content: '\f061';
+	margin-left: 5px;
+	color: #666;
+}
+</style>
+<script>
+ThisPage.register({
+	init: function(){
+		var r = $('r');
+		var ajax1 = new Request.JSON();
+		var s1 = $('sql1');
+		var b1 = $('btn1').addEvent('click', function(evt){
+			if(ajax1.isRunning()) return;
+			ajax1 = new Request.JSON({
+				url: 'db/ajax/select',
+				data: {sql: s1.get('value')},
+				onRequest: function(){
+					b1.disable();
+					s1.disable();
+					r.set('value', '').clearNotices();
+				},
+				onSuccess: function(json, text){
+					r.set('value', text);
+				},
+				onFailure: function(xhr){
+					r.error(xhr.response);
+				},
+				onComplete: function(){
+					b1.enable();
+					s1.enable();
+				}
+			}).send();
+		});
+
+		var ajax2 = new Request.JSON();
+		var s2 = $('sql2');
+		var b2 = $('btn2').addEvent('click', function(evt){
+			if(ajax2.isRunning()) return;
+			ajax2 = new Request.JSON({
+				url: 'db/ajax/insert',
+				data: {sql: s2.get('value')},
+				onRequest: function(){
+					b2.disable();
+					s2.disable();
+					r.set('value', '').clearNotices();
+				},
+				onSuccess: function(json, text){
+					r.success('insert success (id: ' + text + ')');
+					r.set('value', json);
+				},
+				onFailure: function(xhr){
+					r.error(xhr.response);
+				},
+				onComplete: function(){
+					b2.enable();
+					s2.enable();
+				}
+			}).send();
+		});
+
+		var ajax3 = new Request.JSON();
+		var s3 = $('sql3');
+		var b3 = $('btn3').addEvent('click', function(evt){
+			if(ajax3.isRunning()) return;
+			ajax3 = new Request.JSON({
+				url: 'db/ajax/update',
+				data: {sql: s3.get('value'), bulk:1},
+				onRequest: function(){
+					b3.disable();
+					s3.disable();
+					r.set('value', '').clearNotices();
+				},
+				onSuccess: function(json, text){
+					r.success('update success (effect count: ' + text + ')');
+					r.set('value', json);
+				},
+				onFailure: function(xhr){
+					r.error(xhr.response);
+				},
+				onComplete: function(){
+					b3.enable();
+					s3.enable();
+				}
+			}).send();
+		});
+
+		var ajax4 = new Request.JSON();
+		var s4 = $('sql4');
+		var b4 = $('btn4').addEvent('click', function(evt){
+			if(ajax4.isRunning()) return;
+			ajax4 = new Request.JSON({
+				url: 'db/ajax/delete',
+				data: {sql: s4.get('value'), bulk:1},
+				onRequest: function(){
+					b4.disable();
+					s4.disable();
+					r.set('value', '').clearNotices();
+				},
+				onSuccess: function(json, text){
+					r.success('delete success (effect count: ' + text + ')');
+					r.set('value', json);
+				},
+				onFailure: function(xhr){
+					r.error(xhr.response);
+				},
+				onComplete: function(){
+					b4.enable();
+					s4.enable();
+				}
+			}).send();
+		});
+	}
+});
+</script>
+
+
+<h1>DB</h1>
+<div class="row">
+	<div class="col-xs-12" style="border-right:1px solid #CCC;height:650px;">
+		<h4>Select</h4>
+		<div class="clearfix">
+			<textarea id="sql1" class="form-control" rows="2">select * from test</textarea>
+			<button id="btn1" class="btn btn-default pull-right fa">query</button>
+		</div>
+		<hr>
+
+		<h4>Insert</h4>
+		<div class="clearfix">
+			<textarea id="sql2" class="form-control" rows="2">insert into test(a, b) values('java', 'node.js')</textarea>
+			<button id="btn2" class="btn btn-default pull-right fa">execute</button>
+		</div>
+		<hr>
+
+		<h4>Update</h4>
+		<div class="clearfix">
+			<textarea id="sql3" class="form-control" rows="2">update test set a='java1.9', b='node.js+' where id=99</textarea>
+			<button id="btn3" class="btn btn-default pull-right fa">execute</button>
+		</div>
+		<hr>
+
+		<h4>Delete</h4>
+		<textarea id="sql4" class="form-control" rows="2">select * from test</textarea>
+		<button id="btn4" class="btn btn-default pull-right fa">execute</button>
+	</div>
+	<div class="col-xs-12" style="border-left:1px solid #FFF;height:650px;">
+		<h4>Result</h4>
+		<textarea id="r" class="form-control" readonly style="height:600px"></textarea>
+	</div>
+</div>

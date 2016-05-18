@@ -7078,7 +7078,15 @@ Element.implement({
 
 		}, this);
 
-		return Object.append(size, styles);
+		var dim = Object.append(size, styles);
+		/* add by mllee (2015/10/29) for fix when style: {box-sizing: border-box;} */
+		if (this.getStyle('box-sizing') === 'border-box' ||
+			this.getStyle('-webkit-box-sizing') === 'border-box' ||
+			this.getStyle('-moz-box-sizing') === 'border-box') {
+			dim.totalWidth = dim.width;
+			dim.totalHeight = dim.height;
+		}
+		return dim;
 	}
 
 });

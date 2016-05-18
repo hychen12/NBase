@@ -26,7 +26,7 @@ app.use(cookieParser());
 
 /*** routing ***/
 app.use('/', require('./routes/index'));
-//app.use('/users', require('./routes/users'));
+app.use('/dev', require('./routes/dev'));
 
 
 // default page (index.htm)
