@@ -111,6 +111,32 @@ ThisPage.register({
 				}
 			}).send();
 		});
+
+		var ajax5 = new Request.JSON();
+		var s5 = $('sql5');
+		var b5 = $('btn5').addEvent('click', function(evt){
+			if(ajax5.isRunning()) return;
+			ajax5 = new Request.JSON({
+				url: 'db/ajax/transaction',
+				data: {sql: s5.get('value')},
+				onRequest: function(){
+					b5.disable();
+					s5.disable();
+					r.set('value', '').clearNotices();
+				},
+				onSuccess: function(json, text){
+					r.success('transaction done!');
+					r.set('value', text);
+				},
+				onFailure: function(xhr){
+					r.error(xhr.response);
+				},
+				onComplete: function(){
+					b5.enable();
+					s5.enable();
+				}
+			}).send();
+		});
 	}
 });
 </script>
@@ -119,30 +145,34 @@ ThisPage.register({
 <h1>DB</h1>
 <div class="row">
 	<div class="col-xs-12" style="border-right:1px solid #CCC;height:650px;">
-		<h4>Select</h4>
-		<div class="clearfix">
-			<textarea id="sql1" class="form-control" rows="2">select * from test</textarea>
-			<button id="btn1" class="btn btn-default pull-right fa">query</button>
-		</div>
+		<h4 class="pull-left">Select</h4>
+		<button id="btn1" class="btn btn-default pull-right fa">query</button>
+		<textarea id="sql1" class="form-control" rows="2">select * from test</textarea>
 		<hr>
 
-		<h4>Insert</h4>
-		<div class="clearfix">
-			<textarea id="sql2" class="form-control" rows="2">insert into test(a, b) values('java', 'node.js')</textarea>
-			<button id="btn2" class="btn btn-default pull-right fa">execute</button>
-		</div>
+		<h4 class="pull-left">Insert</h4>
+		<button id="btn2" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql2" class="form-control" rows="2">insert into test(a, b) values('java', 'node.js')</textarea>
 		<hr>
 
-		<h4>Update</h4>
-		<div class="clearfix">
-			<textarea id="sql3" class="form-control" rows="2">update test set a='java1.9', b='node.js+' where id=99</textarea>
-			<button id="btn3" class="btn btn-default pull-right fa">execute</button>
-		</div>
+		<h4 class="pull-left">Update</h4>
+		<button id="btn3" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql3" class="form-control" rows="2">update test set a='java1.9', b='node.js+' where id=99</textarea>
 		<hr>
 
-		<h4>Delete</h4>
-		<textarea id="sql4" class="form-control" rows="2">select * from test</textarea>
+		<h4 class="pull-left">Delete</h4>
 		<button id="btn4" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql4" class="form-control" rows="2">delete from test where id=99</textarea>
+		<hr>
+
+		<h4 class="pull-left">Transaction</h4>
+		<button id="btn5" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql5" class="form-control" rows="5">
+update test set a='java1.9', b='node.js+' where id=99;
+insert into test(a, b) values('java', 'node.js');
+insert into test(a, b) values('express', 'gulp')</textarea>
+		<hr>
+
 	</div>
 	<div class="col-xs-12" style="border-left:1px solid #FFF;height:650px;">
 		<h4>Result</h4>
