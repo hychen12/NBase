@@ -1,0 +1,55 @@
+<html>
+<head>
+	{{>html_head}}
+</head>
+
+<body class="nbase-user-body container-fluid">
+<div class="nbase-user-header">
+	<div class="nbase-user-wrapper">
+		<div class="title fa">
+			104 eHRMS 2.0
+			<div class="small">Demo System</div>
+		</div>
+		<div class="nav">
+			<a href="showcase" class="menu fa showcase {{#if isShowcase}}active{{/if}}">Showcase</a>
+			<a href="dev" class="menu fa dev {{#if isDev}}active{{/if}}">Developer</a>
+			<div class="userRegion">
+				<div class="user fa">{{user.name}}</div>
+				<a id="signout" class="signout fa">登出</a>
+			</div>
+		</div>
+
+	</div>
+</div>
+<div class="nbase-user-wrapper">
+	{{{body}}}
+</div>
+</body>
+</html>
+
+
+<script>
+ThisPage.register('Header', {
+	init: function(){
+		var ajax = new Ajax('/.ajax/signout', {
+			onRequest: function(){
+				document.body.loading('登出中...');
+			},
+			onSuccess: function(code, message, data){
+				location.href= '/'
+			},
+			onComplete: function(code, message, data){
+				document.body.unloading();
+			}
+		});
+
+		new J104.Box.Confirm('確定要登出嗎?', {
+			attach: $('signout'),
+			onYes: function(_this){
+				if(ajax.isRunning()) return;
+				else ajax.send();
+			}
+		});
+	}
+});
+</script>

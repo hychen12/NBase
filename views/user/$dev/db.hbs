@@ -1,0 +1,143 @@
+<style>
+	#curd button:after {
+		content: '\f061';
+		margin-left: 5px;
+		color: #666;
+	}
+</style>
+<script>
+	ThisPage.register('DB', {
+		init: function(){
+			var r = $('r');
+			var sql1 = $('sql1'), btn1 = $('btn1');
+			new Ajax('dev.ajax/select', {
+				attach: btn1,
+				loadingTarget: btn1,
+				disableElements: [btn1, sql1],
+				noticeTarget: sql1,
+				onSend: function(){ this.options.data = {sql: sql1.get('value')}; },
+				onSuccess: function(code, message, data){
+					r.appendText(new Date() + ' >>\n' + JSON.encode(data) + '\n\n');
+					r.scrollTop = r.scrollHeight;
+				}
+			});
+
+			var sql2 = $('sql2'), btn2 = $('btn2');
+			new Ajax('dev.ajax/insert', {
+				attach: btn2,
+				loadingTarget: btn2,
+				disableElements: [btn2, sql2],
+				noticeTarget: sql2,
+				onSend: function(){ this.options.data = {sql: sql2.get('value')}; },
+				onSuccess: function(code, message, data){
+					r.appendText(new Date() + ' >>\n' + JSON.encode(data) + '\n\n');
+					r.scrollTop = r.scrollHeight;
+				}
+			});
+
+			var sql3 = $('sql3'), btn3 = $('btn3');
+			new Ajax('dev.ajax/update', {
+				attach: btn3,
+				loadingTarget: btn3,
+				disableElements: [btn3, sql3],
+				noticeTarget: sql3,
+				onSend: function(){ this.options.data = {sql: sql3.get('value')}; },
+				onSuccess: function(code, message, data){
+					r.appendText(new Date() + ' >>\n' + JSON.encode(data) + '\n\n');
+					r.scrollTop = r.scrollHeight;
+				}
+			});
+
+			var sql4 = $('sql4'), btn4 = $('btn4');
+			new Ajax('dev.ajax/delete', {
+				attach: btn4,
+				loadingTarget: btn4,
+				disableElements: [btn4, sql4],
+				noticeTarget: sql4,
+				onSend: function(){ this.options.data = {sql: sql4.get('value')}; },
+				onSuccess: function(code, message, data){
+					r.appendText(new Date() + ' >>\n' + JSON.encode(data) + '\n\n');
+					r.scrollTop = r.scrollHeight;
+				}
+			});
+
+			/*var ajax4 = new Request.JSON();
+			var s4 = $('sql4');
+			var b4 = $('btn4').addEvent('click', function(evt){
+				if(ajax4.isRunning()) return;
+				ajax4 = new Request.JSON({
+					url: 'db/ajax/delete',
+					data: {sql: s4.get('value'), bulk:1},
+					onRequest: function(){
+						b4.disable();
+						s4.disable();
+						r.set('value', '').clearNotices();
+					},
+					onSuccess: function(json, text){
+						r.success('delete success (effect count: ' + text + ')');
+						r.set('value', json);
+					},
+					onFailure: function(xhr){
+						r.error(xhr.response);
+					},
+					onComplete: function(){
+						b4.enable();
+						s4.enable();
+					}
+				}).send();
+			});*/
+
+			var sql5 = $('sql5'), btn5 = $('btn5');
+			new Ajax('dev.ajax/transaction', {
+				attach: btn5,
+				loadingTarget: btn5,
+				disableElements: [btn5, sql5],
+				noticeTarget: sql5,
+				onSend: function(){ this.options.data = {sql: sql5.get('value')}; },
+				onSuccess: function(code, message, data){
+					r.appendText(new Date() + ' >>\n' + JSON.encode(data) + '\n\n');
+					r.scrollTop = r.scrollHeight;
+				}
+			});
+		}
+	});
+</script>
+
+
+<div class="row">
+	<div id="curd" class="col-xs-12" style="border-right:1px solid #CCC;height:650px;">
+		<h4 class="pull-left">Select</h4>
+		<button id="btn1" class="btn btn-default pull-right fa">query</button>
+		<textarea id="sql1" class="form-control" rows="2">select * from test</textarea>
+		<hr>
+
+		<h4 class="pull-left">Insert</h4>
+		<button id="btn2" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql2" class="form-control" rows="2">insert into test(a, b) values('java', 'node.js')</textarea>
+		<hr>
+
+		<h4 class="pull-left">Update</h4>
+		<button id="btn3" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql3" class="form-control" rows="2">update test set a='java1.9', b='node.js+' where id=99</textarea>
+		<hr>
+
+		<h4 class="pull-left">Delete</h4>
+		<button id="btn4" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql4" class="form-control" rows="2">delete from test where id=99</textarea>
+		<hr>
+
+		<h4 class="pull-left">Transaction</h4>
+		<button id="btn5" class="btn btn-default pull-right fa">execute</button>
+		<textarea id="sql5" class="form-control" rows="5">
+update test set a='java1.9', b='node.js+' where id=99;
+insert into test(a, b) values('java', 'node.js');
+insert into test(a, b) values('express', 'gulp')</textarea>
+		<hr>
+
+	</div>
+	<div class="col-xs-12" style="border-left:1px solid #FFF;height:650px;">
+		<h4 class="pull-left">Console</h4>
+		<button class="btn btn-default pull-right" onclick="document.id('r').empty()">clear</button>
+		<textarea id="r" class="form-control" readonly style="height:600px"></textarea>
+	</div>
+</div>

@@ -1,0 +1,111 @@
+<style>
+	.signWrapper{
+		margin: 0 auto;
+		display: table;
+		height: 100%;
+	}
+	.signRegion{
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.signPanel{
+		width: 420px;
+		background-color: #fff;
+		border-radius: 5px;
+		box-shadow: 0 1px 0 rgba(0,0,0,.25);
+		padding: 30px 80px 40px 80px;
+		border: 1px solid #e8e8e8;
+	}
+	.signPanel .title{
+		font-size: 20px;
+		margin: 20px 0 10px 0;
+		padding-top: 20px;
+		font-weight: bold;
+	}
+	.signPanel .title:before{
+		content: '\f1ae';
+		float: left;
+		font-size: 36px;
+		margin: 6px 10px 8px 10px;
+	}
+	.signPanel input{
+		font-size: 20px;
+		height: 40px;
+		padding: 0px 12px;
+		margin: -1px 0 0 0;
+		position: relative;
+		z-index: 0;
+	}
+	.signPanel input:hover{ z-index: 1; }
+	.signPanel input:focus{ z-index: 2; }
+
+	.signPanel #id{
+		border-radius: 6px 6px 0 0;
+		margin-top: 20px;
+	}
+	.signPanel #pwd{
+		border-radius: 0 0 6px 6px;
+		margin-bottom: 10px;
+	}
+	.signPanel button[type=submit]{
+		font-size: 18px;
+		padding: 12px 0 10px 0;
+		width: 100%;
+	}
+	.signPanel button[type=submit]:after{
+		content: '\f090';
+		margin-left: 10px;
+	}
+	.signPanel .footer{
+		margin-top: 30px;
+		border-top: 1px solid #EEE;
+		padding: 5px;
+		text-align: center;
+	}
+</style>
+
+<div class="signWrapper">
+	<div class="signRegion">
+		<div id="panel" class="signPanel">
+			<div class="title fa">
+				104 eHRMS 2.0
+				<div class="small fa">Demo System</div>
+			</div>
+
+			<input type="text" id="id" placeholder="id" class="form-control" />
+			<input type="password" id="pwd" placeholder="password" class="form-control" />
+			<button type="submit" class="btn btn-primary fa">登入</button>
+
+			<div class="footer">
+				<a href="javascript:$('panel').notice('I can not help u, sorry! Ha ha ...')">need help ?</a> |
+				<a href="javascript:" id="temp1">快速登入</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+ThisPage.register('SignIn', {
+	init: function(){
+		var ajax = new Ajax('.ajax/signTemp1', {
+			noticeTarget: $('panel'),
+			onRequest: function(){
+				ajax.notice.clear();
+				document.body.loading('登入中...');
+			},
+			onSuccess: function(code, message, data){
+				if(code >= 300) ajax.notice.error(message);
+				else location.href= 'user/showcase'
+			},
+			onComplete: function(code, message, data){
+				document.body.unloading();
+			}
+		});
+
+		$('temp1').addEvent('click', function(){
+			if(!ajax.isRunning()) ajax.send();
+		}.bind(this));
+	}
+});
+</script>
+

@@ -40,10 +40,133 @@ hr{
 	border-bottom: 1px solid #FFF;
 }
 
+h3:before{
+	margin-right: 10px;
+	font-weight: bold !important;
+}
+
 button {
 	outline: none !important;
 }
 
 textarea.form-control{
 	resize: none;
+}
+
+
+/* user layout section */
+.nbase-user-body{
+	background-color: rgb(249, 249, 249);
+	font-family: 'zhTW-1', 'Microsoft JhengHei';
+	vertical-align: middle;
+	padding: 0;
+	font-size: 16px;
+}
+
+.nbase-user-header{
+	background: #fff;
+	height: 80px;
+	box-shadow: 0 1px 4px rgba(0,0,0,.15);
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 100;
+}
+
+.nbase-user-wrapper{
+	width: 1024px;
+	margin: 0 auto;
+	padding: 0 12px;
+}
+
+.nbase-user-header .title{
+	display: inline-block;
+	padding: 14px 0px;
+	color: #333;
+	font-size: 20px;
+	font-weight: bold;
+}
+.nbase-user-header .title:before{
+	content: '\f1ae';
+	font-size: 40px;
+	float: left;
+	padding: 5px 10px 5px 0;
+	color: #23527c;
+}
+
+.nbase-user-header .title .small{
+	color: #999;
+	font-weight: normal;
+}
+
+.nbase-user-header .nav{
+	float: right;
+}
+
+.nbase-user-header .nav > .menu{
+	display: inline-block;
+	height: 80px;
+	padding: 15px 10px;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+	color: #999;
+}
+.nbase-user-header .nav > .menu:hover{
+	text-decoration: none;
+	color: #000;
+}
+
+.nbase-user-header .nav > .menu.active{
+	color: #23527c;
+	text-shadow: 0 0 5px rgb(102, 175, 233);
+}
+
+.nbase-user-header .nav > .menu:before {
+	font-size: 20px;
+	margin-bottom: 8px;
+	display: block;
+}
+.nbase-user-header .nav > .menu.active:before {
+	font-size: 24px;
+	margin-bottom: 4px;
+}
+.fa.showcase:before {content: '\f0f2';}
+.fa.dev:before {content: '\f121';}
+
+.nbase-user-header .nav > .userRegion{
+	display: inline-block;
+	margin: 15px 0px 15px 20px;
+	padding-left: 10px;
+	border-left: 1px solid #EEE;
+	font-size: 90%;
+	line-height: 1.8;
+	text-align: right;
+}
+
+.nbase-user-header .nav > .userRegion > .user{
+	color: #999;
+	max-width: 120px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.nbase-user-header .nav > .userRegion > .user:before{
+	content: '\f007';
+	margin-right: 3px;
+	color: #333;
+}
+
+.nbase-user-header .nav > .userRegion > .signout{
+	cursor: pointer;
+}
+.nbase-user-header .nav > .userRegion > .signout:before{
+	content: '\f08b';
+	margin-right: 2px;
+}
+
+.nbase-user-body > .nbase-user-wrapper {
+	padding-top: 80px;
 }

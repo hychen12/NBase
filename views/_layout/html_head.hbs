@@ -12,3 +12,27 @@
 <script type="text/javascript" src="/js/2.x/J104.js"></script>
 <script type="text/javascript" src="/js/2.x/J104.Box.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
+<script>
+	var ThisPage = {
+		members: {},
+
+		init: function () {
+			Object.each(this.members, function(m, key){
+				if(!m.init) return;
+				m.init();
+				if({{devMode}}) console.log(key);
+			});
+		},
+
+		register: function(v, member) {
+			if(v){
+				window[v] = member;
+				this.members[v] = member;
+			}
+		}
+	};
+
+	window.addEvent('domready', function () {
+		if(ThisPage && ThisPage.init) ThisPage.init();
+	});
+</script>

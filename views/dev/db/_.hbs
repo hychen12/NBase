@@ -9,29 +9,25 @@ button:after {
 ThisPage.register({
 	init: function(){
 		var r = $('r');
-		var ajax1 = new Request.JSON();
+		var ajax1 = new Ajax('db/ajax/select', {
+			data: {sql: s1.get('value')},
+			noticeTarget: r,
+			onRequest: function(){
+				b1.disable();
+				s1.disable();
+				r.set('value', '').clearNotices();
+			},
+			onSuccess: function(code, message, data){
+				r.set('value', data);
+			},
+			onComplete: function(){
+				b1.enable();
+				s1.enable();
+			}
+		});
 		var s1 = $('sql1');
 		var b1 = $('btn1').addEvent('click', function(evt){
-			if(ajax1.isRunning()) return;
-			ajax1 = new Request.JSON({
-				url: 'db/ajax/select',
-				data: {sql: s1.get('value')},
-				onRequest: function(){
-					b1.disable();
-					s1.disable();
-					r.set('value', '').clearNotices();
-				},
-				onSuccess: function(json, text){
-					r.set('value', text);
-				},
-				onFailure: function(xhr){
-					r.error(xhr.response);
-				},
-				onComplete: function(){
-					b1.enable();
-					s1.enable();
-				}
-			}).send();
+			if(!ajax1.isRunning()) ajax1.send();
 		});
 
 		var ajax2 = new Request.JSON();
